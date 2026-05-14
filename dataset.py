@@ -1,5 +1,9 @@
 import torch
-from tokenizer import text, stoi, itos, encode, decode
+from tokenizer import encode
+
+with open("input.txt", "r", encoding="utf-8") as f:
+    text = f.read()
+
 
 data = torch.tensor(encode(text), dtype=torch.long)
 
@@ -8,8 +12,8 @@ n = int(0.9 * len(data))
 train_data = data[:n]
 val_data = data[n:]
 
-block_size = 8
-batch_size = 4
+block_size = 16
+batch_size = 256
 
 def get_batch(split):
     data = train_data if split == "train" else val_data
