@@ -1,12 +1,14 @@
 import torch
-from model import BigramLanguageModel
+from model import GPTLanguageModel
 from dataset import get_batch
 from tokenizer import decode, chars
 
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-model = BigramLanguageModel(len(chars))
+print(f"Using device: {device}")
+
+model = GPTLanguageModel(len(chars))
 model = model.to(device)
 
 optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3)
